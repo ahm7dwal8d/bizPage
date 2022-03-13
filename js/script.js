@@ -110,3 +110,43 @@ function RemoveBoxs() {
         el.style.transition = "all 0.4s linear"
     })
 }
+
+let BoxImg = document.querySelectorAll(".portfolio img")
+
+BoxImg.forEach((img) => {
+    img.addEventListener("click" , function () {
+        let BoxOverly = document.createElement("div");
+
+        BoxOverly.className = "box-overly"
+
+        document.body.appendChild(BoxOverly)
+
+        let box = document.createElement("div")
+
+        box.className = "img-box"
+
+        let overlyimg = document.createElement("img")
+        overlyimg.src = img.src;
+
+        box.appendChild(overlyimg)
+        
+        BoxOverly.appendChild(box)
+
+        let CloseButton = document.createElement("span");
+        
+        CloseButton.className = "close-button"
+
+        let CloseButtonText = document.createTextNode("X")
+
+        CloseButton.appendChild(CloseButtonText)
+
+        box.appendChild(CloseButton)
+
+        document.addEventListener("click" , (el) => {
+            if (el.target.className === "close-button") {
+                box.remove()
+                BoxOverly.remove()
+            }
+        })
+    })
+})
