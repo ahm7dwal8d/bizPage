@@ -4,12 +4,14 @@ let Header = document.querySelector(".header")
 
 // BurgerIcon Header 
 
-let BurgerIcon = document.querySelector(".header i")
-let Headerlinks = document.querySelector(".header ul")
 
-BurgerIcon.onclick = function () {
-    Headerlinks.classList.toggle("active")
-}
+$(".header i").on("click" , function () {
+
+    $(".header ul").slideToggle(1000)
+
+    $(".header ul li a").css("width","fit-content")
+
+})
 
 // Skills ProgHolder
 let SkillsSction = document.querySelector(".skill")
@@ -23,37 +25,61 @@ let FactCounte = document.querySelectorAll(".fact .counte")
 let Started = false ;
 
 function StartCounter(el) {
+
     let goal = el.dataset.goal;
+
     let Counter = setInterval(function () {
+
         el.textContent++;
+
         if (el.textContent === goal) {
+
             clearInterval(Counter)
+
         }
+
     }, 10)
 }
 
 window.onscroll = function () {
+
     if (window.scrollY >= FactSection.offsetTop) {
+
         if (!Started) {
+
             FactCounte.forEach((span)=> {
+
                 StartCounter(span)
+
             })
+
         }
+
         Started = true
+
     }
 
     // Skill Section 
     let SectionOffsetTop = SkillsSction.offsetTop;
+
     let SectionOffHeight = SkillsSction.offsetHeight;
+
     let PageHeight = innerHeight;
+
     if (window.scrollY > (SectionOffsetTop + SectionOffHeight - PageHeight)) {
+
         SkillsElement.forEach((div)=> {
+
             div.style.width = div.dataset.width
+
         })
     } 
     if (window.scrollY < (SectionOffsetTop + SectionOffHeight - PageHeight)) {
+
         SkillsElement.forEach((div)=> {
+
             div.style.width = "0"
+
         })
     } 
     // Header Fixed
@@ -77,6 +103,7 @@ let RandomNumber = Math.floor(Math.random() * MyArry.length)
 setInterval (function () {
 
     let RandomNumber = Math.floor(Math.random() * MyArry.length)
+
     laningSection.style.backgroundImage = "url(../images/hero-carousel/"+ MyArry[RandomNumber] +")"
 } , 5000)
 
@@ -84,37 +111,30 @@ setInterval (function () {
 
 // PortfolioSection Fillter 
 
-let PortfolioHead = document.querySelectorAll(".portfolio .container .head button")
-let portfolioBoxs = document.querySelectorAll(".portfolio .container .portfolio-content .box")
 
-// Remove Active Class And Add Active To Click Element 
+var PortfolioHead = $(".portfolio .container .head button")
 
-PortfolioHead.forEach((li) => {
-    li.addEventListener("click" , RemoveActiveClass)
-    li.addEventListener("click" , RemoveBoxs)
+PortfolioHead.click(function () {
+
+    $(this).addClass("active").siblings().removeClass("active")
+
+    console.log($(this).data("class"))
+
+    var BoxClass = $(this).data("class")
+
+    $(".portfolio .container .portfolio-content .box").fadeOut()
+
+    $(".portfolio .container .portfolio-content ." + BoxClass).delay(200).fadeIn()
+
 })
 
-function RemoveActiveClass() {
-    PortfolioHead.forEach((li)=> {
-        li.classList.remove("active")
-        this.classList.add("active")
-    })
-}
-
-function RemoveBoxs() {
-    portfolioBoxs.forEach((box)=> {
-        box.style.display = "none"
-    })
-    document.querySelectorAll(this.dataset.class).forEach((el)=> {
-        el.style.display = "block"
-        el.style.transition = "all 0.4s linear"
-    })
-}
 
 let BoxImg = document.querySelectorAll(".portfolio img")
 
 BoxImg.forEach((img) => {
+
     img.addEventListener("click" , function () {
+
         let BoxOverly = document.createElement("div");
 
         BoxOverly.className = "box-overly"
@@ -143,10 +163,65 @@ BoxImg.forEach((img) => {
         box.appendChild(CloseButton)
 
         document.addEventListener("click" , (el) => {
+
             if (el.target.className === "close-button") {
+
                 box.remove()
+
                 BoxOverly.remove()
+
             }
+
         })
+
     })
+
 })
+
+
+$(".header ul li a").click(function (e) {
+
+    e.preventDefault()
+
+    $(this).addClass("active").parent().siblings().find("a").removeClass("active")
+
+    var HeaderScroll = $(this).data("scroll")
+
+    console.log("." +HeaderScroll)
+
+    var HeaderHeight = $(".header").innerHeight()
+
+    $("html , body").animate({
+
+        scrollTop: $("." +HeaderScroll).offset().top - HeaderHeight
+
+    })
+
+})
+
+// Button Scroll To Top
+
+$(".up").click(function () {
+
+    $("html , body").animate({
+
+        scrollTop: 0
+
+    } , 600)
+
+})
+
+$(window).scroll(function () {
+
+    if ($(window).scrollTop() >= 800) {
+
+        $(".up").show()
+
+    } else {
+
+        $(".up").hide()
+
+    }
+})
+
+
