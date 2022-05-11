@@ -1,15 +1,232 @@
-// Header Fixed 
-let Header = document.querySelector(".header")
+// Header Section   
 
+$(".header ul li a").click(function (e) {
 
-// BurgerIcon Header 
+    e.preventDefault()
 
+    $(this).addClass("active").parent().siblings().find("a").removeClass("active")
+
+    var HeaderScroll = $(this).data("scroll")
+
+    console.log("." +HeaderScroll)
+
+    var HeaderHeight = $(".header").innerHeight()
+
+    $("html , body").animate({
+
+        scrollTop: $("." +HeaderScroll).offset().top - HeaderHeight
+
+    })
+
+})
 
 $(".header i").on("click" , function () {
 
-    $(".header ul").slideToggle(1000)
+    $(".header ul").slideToggle()
 
-    $(".header ul li a").css("width","fit-content")
+
+})
+
+$(window).scroll(function () {
+
+    if ($(window).scrollTop() >= 800) {
+
+        $(".header").addClass("active")
+
+    } else {
+
+        $(".header").removeClass("active")
+
+    }
+
+})
+
+
+
+// landing Section 
+
+// let laningSection = document.querySelector(".landing ")
+
+// let MyArry = ["1.jpg" , "2.jpg" , "3.jpg" , "4.jpg" , "5.jpg"]
+
+// let RandomNumber = Math.floor(Math.random() * MyArry.length)
+
+// setInterval (function () {
+
+//     let RandomNumber = Math.floor(Math.random() * MyArry.length)
+
+//     laningSection.style.backgroundImage = "url(../images/hero-carousel/"+ MyArry[RandomNumber] +")"
+// } , 5000)
+
+let slider = document.querySelector(".landing .slider")
+
+let Slide = slider.getElementsByClassName("slide")
+
+function next() {
+
+    slider.append(Slide[0])
+
+}
+
+function prev() {
+
+    slider.prepend(Slide[Slide.length - 1])
+
+}
+
+$(window).ready(function () {
+
+    $(".landing .hidden").animate({
+
+        opacity: 1
+
+    })
+
+
+})
+
+
+// Box Model Section 
+
+$(".box-model .icon i").click(function () {
+
+    $(".box-model").toggleClass("active")
+
+})
+
+$(".box-model .color ul div").click(function () {
+
+    $(this).addClass("active").siblings().removeClass("active")
+
+})
+
+document.body.classList.add(localStorage.getItem("bodycolor"))
+
+let el = document.querySelectorAll(".box-model .color div")
+
+let ColorArrey = []
+
+for (let i = 0; i < el.length; i++) {
+
+    ColorArrey.push(el[i].getAttribute("data-color"))
+
+    el[i].addEventListener("click" , function () {
+
+        document.body.classList.remove(...ColorArrey)
+
+        document.body.classList.add(el[i].getAttribute("data-color"))
+
+        localStorage.setItem("bodycolor" , this.getAttribute("data-color"))
+
+        console.log(localStorage.getItem("bodycolor"))
+
+    })
+
+}
+
+// feature Section 
+
+$(window).scroll(function () {
+
+    if ($(window).scrollTop() >= $(".feature").offset().top - 500) {
+
+        $(".feature .top").animate({
+
+            top: 0,
+
+            opacity: 1
+
+        })
+
+        $(".feature .bottom").animate({
+
+            bottom: 0,
+
+            opacity: 1
+
+        })
+
+    }
+
+})
+
+// About Section 
+
+$(window).scroll(function () {
+
+    if ($(window).scrollTop() >= $(".about").offset().top - 400) {
+
+        $(".about .hidden").animate({
+
+            opacity: 1
+
+        })
+
+        $(".about .top").animate({
+
+            top: 0,
+
+            opacity: 1
+
+        })
+
+        $(".about .bottom").animate({
+
+            bottom: 0,
+
+            opacity: 1
+
+        })
+
+    }
+
+})
+
+// services Section 
+
+$(window).scroll(function () {
+
+    if ($(window).scrollTop() >= $(".services").offset().top - 400) {
+
+        $(".services .hidden").animate({
+
+            opacity: 1
+
+        })
+
+        $(".services .left").animate({
+
+            left: 0,
+
+            opacity: 1
+
+        })
+
+        $(".services .top").animate({
+
+            top: 0,
+
+            opacity: 1
+
+        })
+
+        $(".services .bottom").animate({
+
+            bottom: 0,
+
+            opacity: 1
+
+        })
+
+        $(".services .right").animate({
+
+            right: 0,
+
+            opacity: 1
+
+        })
+
+    }
 
 })
 
@@ -17,11 +234,58 @@ $(".header i").on("click" , function () {
 let SkillsSction = document.querySelector(".skill")
 let SkillsElement = document.querySelectorAll(".skill .prog-holder .prog")
 
+$(window).scroll(function () {
+
+    if ($(window).scrollTop() >= $(".skill").offset().top - 400) {
+
+        $(".skill .hidden").animate({
+
+            opacity: 1
+
+        })
+
+        $(".skill .left").animate({
+
+            left: 0,
+
+            opacity: 1
+
+        })
+
+        $(".skill .top").animate({
+
+            top: 0,
+
+            opacity: 1
+
+        })
+
+        $(".skill .bottom").animate({
+
+            bottom: 0,
+
+            opacity: 1
+
+        })
+
+        $(".skill .right").animate({
+
+            right: 0,
+
+            opacity: 1
+
+        })
+
+    }
+
+})
 
 // Fact Section 
 
 let FactSection = document.querySelector(".fact")
+
 let FactCounte = document.querySelectorAll(".fact .counte")
+
 let Started = false ;
 
 function StartCounter(el) {
@@ -41,90 +305,56 @@ function StartCounter(el) {
     }, 10)
 }
 
-window.onscroll = function () {
+$(window).scroll(function () {
 
-    if (window.scrollY >= FactSection.offsetTop) {
+    if ($(window).scrollTop() >= $(".fact").offset().top - 400) {
 
-        if (!Started) {
+        $(".fact .hidden").animate({
 
-            FactCounte.forEach((span)=> {
+            opacity: 1
 
-                StartCounter(span)
+        })
 
-            })
+        $(".fact .left").animate({
 
-        }
+            left: 0,
 
-        Started = true
+            opacity: 1
+
+        })
+
+        $(".fact .right").animate({
+
+            right: 0,
+
+            opacity: 1
+
+        })
+
+        $(".fact .top").animate({
+
+            top: 0,
+
+            opacity: 1
+
+        })
 
     }
 
-    // Skill Section 
-    let SectionOffsetTop = SkillsSction.offsetTop;
-
-    let SectionOffHeight = SkillsSction.offsetHeight;
-
-    let PageHeight = innerHeight;
-
-    if (window.scrollY > (SectionOffsetTop + SectionOffHeight - PageHeight)) {
-
-        SkillsElement.forEach((div)=> {
-
-            div.style.width = div.dataset.width
-
-        })
-    } 
-    if (window.scrollY < (SectionOffsetTop + SectionOffHeight - PageHeight)) {
-
-        SkillsElement.forEach((div)=> {
-
-            div.style.width = "0"
-
-        })
-    } 
-    // Header Fixed
-    if (window.scrollY >= 800) {
-        Header.classList.add("fixed")
-    } else {
-        Header.classList.remove("fixed")
-    }
-
-}
-
-
-// landing Section 
-
-let laningSection = document.querySelector(".landing")
-
-let MyArry = ["1.jpg" , "2.jpg" , "3.jpg" , "4.jpg" , "5.jpg"]
-
-let RandomNumber = Math.floor(Math.random() * MyArry.length)
-
-setInterval (function () {
-
-    let RandomNumber = Math.floor(Math.random() * MyArry.length)
-
-    laningSection.style.backgroundImage = "url(../images/hero-carousel/"+ MyArry[RandomNumber] +")"
-} , 5000)
-
-
+})
 
 // PortfolioSection Fillter 
 
 
-var PortfolioHead = $(".portfolio .container .head button")
-
-PortfolioHead.click(function () {
+$(".portfolio .container .head button").click(function () {
 
     $(this).addClass("active").siblings().removeClass("active")
 
-    console.log($(this).data("class"))
+    var Class = $(this).data("class")
 
-    var BoxClass = $(this).data("class")
+    $(".portfolio .container .portfolio-content .box").hide()
 
-    $(".portfolio .container .portfolio-content .box").fadeOut()
-
-    $(".portfolio .container .portfolio-content ." + BoxClass).delay(200).fadeIn()
+    $(".portfolio .container .portfolio-content ." + Class).show()
 
 })
 
@@ -146,6 +376,7 @@ BoxImg.forEach((img) => {
         box.className = "img-box"
 
         let overlyimg = document.createElement("img")
+
         overlyimg.src = img.src;
 
         box.appendChild(overlyimg)
@@ -178,24 +409,356 @@ BoxImg.forEach((img) => {
 
 })
 
+$(window).scroll(function () {
 
-$(".header ul li a").click(function (e) {
+    if ($(window).scrollTop() >= $(".portfolio").offset().top - 400) {
 
-    e.preventDefault()
+        $(".portfolio .hidden").animate({
 
-    $(this).addClass("active").parent().siblings().find("a").removeClass("active")
+            opacity: 1
 
-    var HeaderScroll = $(this).data("scroll")
+        })
 
-    console.log("." +HeaderScroll)
+        $(".portfolio .left").animate({
 
-    var HeaderHeight = $(".header").innerHeight()
+            left: 0,
 
-    $("html , body").animate({
+            opacity: 1
 
-        scrollTop: $("." +HeaderScroll).offset().top - HeaderHeight
+        })
 
-    })
+        $(".portfolio .right").animate({
+
+            right: 0,
+
+            opacity: 1
+
+        })
+
+        $(".portfolio .top").animate({
+
+            top: 0,
+
+            opacity: 1
+
+        })
+
+        $(".portfolio .bottom").animate({
+
+            bottom: 0,
+
+            opacity: 1
+
+        })
+
+    }
+
+})
+
+// Client Section 
+
+
+let clientSlider = document.querySelector(".client .slider")
+
+let clientItems = clientSlider.getElementsByClassName("img")
+
+function clientNext() {
+
+    clientSlider.append(clientItems[0])
+
+}
+function clientPrev() {
+
+    clientSlider.prepend(clientItems[clientItems.length - 1])
+
+}
+
+$(window).scroll(function () {
+
+    if ($(window).scrollTop() >= $(".client").offset().top - 400) {
+
+        $(".client .left").animate({
+
+            left: 0,
+
+            opacity: 1
+
+        })
+
+        $(".client .top").animate({
+
+            top: 0,
+
+            opacity: 1
+
+        })
+
+        $(".client .bottom").animate({
+
+            bottom: 0,
+
+            opacity: 1
+
+        })
+
+        $(".client .right").animate({
+
+            right: 0,
+
+            opacity: 1
+
+        })
+
+    }
+
+})
+
+// Testimonlis Section 
+
+let testSlider = document.querySelector(".testimonials .slider")
+let testBox = testSlider.getElementsByClassName("box")
+
+function testNext() {
+
+    testSlider.append(testBox[0])
+
+}
+function testPrev() {
+
+    testSlider.prepend(testBox[testBox.length - 1])
+
+}
+
+$(window).scroll(function () {
+
+    if ($(window).scrollTop() >= $(".testimonials").offset().top - 400) {
+
+        $(".testimonials .hidden").animate({
+
+            opacity: 1
+
+        })
+
+        $(".testimonials .left").animate({
+
+            left: 0,
+
+            opacity: 1
+
+        })
+
+        $(".testimonials .top").animate({
+
+            top: 0,
+
+            opacity: 1
+
+        })
+
+        $(".testimonials .right").animate({
+
+            right: 0,
+
+            opacity: 1
+
+        })
+
+        $(".testimonials .bottom").animate({
+
+            bottom: 0,
+
+            opacity: 1
+
+        })
+
+    }
+
+})
+
+// Team Section 
+
+$(window).scroll(function () {
+
+    if ($(window).scrollTop() >= $(".team").offset().top - 400) {
+
+        $(".team .hidden").animate({
+
+            opacity: 1
+
+        })
+
+        $(".team .left").animate({
+
+            left: 0,
+
+            opacity: 1
+
+        })
+
+        $(".team .top").animate({
+
+            top: 0,
+
+            opacity: 1
+
+        })
+
+        $(".team .bottom").animate({
+
+            bottom: 0,
+
+            opacity: 1
+
+        })
+
+        $(".team .right").animate({
+
+            right: 0,
+
+            opacity: 1
+
+        })
+
+    }
+
+})
+
+// Contact Section 
+
+let nameInput = document.querySelector(".contact input[name=name]")
+
+let emailInput = document.querySelector(".contact input[name=mail]")
+
+let subjectInput = document.querySelector(".contact input[name=sub]")
+
+window.onsubmit = function (Event) {
+
+    let Valid = false
+
+    if (Valid === false) {
+
+        Event.preventDefault()
+
+    }
+
+    if (nameInput !== "") {
+
+        localStorage.setItem("UserName" , nameInput.value)
+
+        Valid = true
+
+    }
+
+    if (emailInput !== "") {
+
+        localStorage.setItem("Email" , emailInput.value)
+
+        Valid = true
+
+    }
+
+    if (subjectInput !== "") {
+
+        localStorage.setItem("Subject" , subjectInput.value)
+
+        Valid = true
+
+    }
+
+
+}
+
+$(window).scroll(function () {
+
+    if ($(window).scrollTop() >= $(".contact").offset().top - 400) {
+
+        $(".contact .hidden").animate({
+
+            opacity: 1
+
+        })
+
+        $(".contact .left").animate({
+
+            left: 0,
+
+            opacity: 1
+
+        })
+
+        $(".contact .top").animate({
+
+            top: 0,
+
+            opacity: 1
+
+        })
+
+        $(".contact .right").animate({
+
+            right: 0,
+
+            opacity: 1
+
+        })
+
+        $(".contact .bottom").animate({
+
+            bottom: 0,
+
+            opacity: 1
+
+        })
+
+    }
+
+})
+
+// Footer Section 
+
+$(window).scroll(function () {
+
+    if ($(window).scrollTop() >= $(".footer").offset().top - 400) {
+
+        $(".footer .hidden").animate({
+
+            opacity: 1
+
+        })
+
+        $(".footer .left").animate({
+
+            left: 0,
+
+            opacity: 1
+
+        })
+
+        $(".footer .top").animate({
+
+            top: 0,
+
+            opacity: 1
+
+        })
+
+        $(".footer .right").animate({
+
+            right: 0,
+
+            opacity: 1
+
+        })
+
+        $(".footer .bottom").animate({
+
+            bottom: 0,
+
+            opacity: 1
+
+        })
+
+    }
 
 })
 
@@ -224,4 +787,38 @@ $(window).scroll(function () {
     }
 })
 
+window.onscroll = function () {
 
+    if (window.scrollY >= FactSection.offsetTop - 400) {
+
+        if (!Started) {
+
+            FactCounte.forEach((span)=> {
+
+                StartCounter(span)
+
+            })
+
+        }
+
+        Started = true
+
+    }
+
+    // Skill Section 
+    let SectionOffsetTop = SkillsSction.offsetTop;
+
+    let SectionOffHeight = SkillsSction.offsetHeight;
+
+    let PageHeight = innerHeight;
+
+    if (window.scrollY > (SectionOffsetTop + SectionOffHeight - PageHeight)) {
+
+        SkillsElement.forEach((div)=> {
+
+            div.style.width = div.dataset.width
+
+        })
+    } 
+
+}
